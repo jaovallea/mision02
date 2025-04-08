@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- https://jaovallea.github.io/mision01 -->
+<!-- ssh -T git@github.com -->
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soluciones TIC - Servicios Tecnológicos</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Fix for Spanish text overflow */
+        .navbar-nav .nav-link,
+        .btn,
+        .card-title,
+        .card-text {
+            white-space: normal !important;
+            word-wrap: break-word;
+        }
+
+        /* Adjust form labels and inputs */
+        .form-label,
+        .form-control {
+            font-size: 0.95rem;
+        }
+
+        /* Gallery filter buttons responsiveness */
+        .gallery-filter {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .gallery-filter .btn {
+            padding: 6px 12px;
+            font-size: 0.85rem;
+        }
+
+        /* Task list adjustments */
+        #taskList li {
+            word-break: break-word;
+        }
+
+        /* Registration Form Styles */
+        #register .card {
+            border-radius: 10px;
+        }
+
+        #register .form-control:focus {
+            border-color: #2125ab;
+            box-shadow: 0 0 0 0.25rem rgba(33, 37, 171, 0.25);
+        }
+
+        #register .invalid-feedback {
+            display: none;
+        }
+
+        #register .is-invalid {
+            border-color: #dc3545;
+        }
+
+        #register .is-invalid~.invalid-feedback {
+            display: block;
+        }
+
+        /* Gallery Styles */
+        .gallery-section {
+            padding: 60px 0;
+            background-color: #f8f9fa;
+        }
+
+        .gallery-filter {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .gallery-item {
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item .img-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(33, 25, 171, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .img-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item .img-overlay i {
+            color: white;
+            font-size: 2rem;
+        }
+
+        /* Estilos ajustados */
+        .hero-section {
+            /* background: linear-gradient(rgba(106, 147, 224, 0.7), rgba(112, 111, 111, 0.7)), url('https://placehold.co/1920x600?text=TIC+Services'); */
+            background: linear-gradient(rgba(0, 0, 0, 0.816), rgba(33, 25, 171, 0.718)), url('img/hero.avif');
+            background-size: cover;
+            background-position: center;
+            color: rgb(193, 221, 238);
+            padding: 120px 0;
+        }
+
+        .service-card {
+            transition: transform 0.3s;
+            height: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .navbar-centered .navbar-collapse {
+            justify-content: center !important;
+        }
+
+        .navbar-centered .navbar-nav {
+            align-items: center;
+        }
+
+        .text-decoration-line-through {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Centered Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-centered sticky-top">
+        <div class="container">
+            <button class="navbar-toggler mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarMain">
+                <a class="navbar-brand mx-lg-3" href="#">
+                    <!-- <img src="https://placehold.co/150x50?text=TIC+Soluciones" alt="Logo" height="40"> -->
+                    <img src="img/techlogo.png" alt="Logo" height="40" width="auto">
+                </a>
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link active" href="#">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#nosotros">¿Por qué elegirnos?</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about-me">Sobre mí</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#blog">Blog</a>
+                    </li>
+                </ul>
+                <div class="ms-lg-3">
+                    <a href="#contacto" class="btn btn-primary"><i class="fas fa-paper-plane me-2"></i>Cotizar</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección Hero -->
+    <section class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-3">Soluciones TIC para tu negocio</h1>
+            <p class="lead mb-4">Optimizamos tu tecnología con servicios personalizados</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="#servicios" class="btn btn-primary btn-lg px-4">Ver servicios</a>
+                <a href="#contacto" class="btn btn-outline-light btn-lg px-4">Contactar</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Servicios -->
+    <section id="servicios" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">¿Qué ofrecemos?</h2>
+                <p class="text-muted">Servicios tecnológicos de última generación</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card service-card shadow-sm text-center p-4">
+                        <div class="mb-3 text-primary">
+                            <i class="fas fa-laptop-code fa-3x"></i>
+                        </div>
+                        <h4>Desarrollo Web</h4>
+                        <p class="text-muted">Sitios web a medida y aplicaciones empresariales</p>
+                        <a href="#" class="btn btn-sm btn-outline-primary">Más info</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card service-card shadow-sm text-center p-4">
+                        <div class="mb-3 text-primary">
+                            <i class="fas fa-shield-alt fa-3x"></i>
+                        </div>
+                        <h4>Ciberseguridad</h4>
+                        <p class="text-muted">Protección avanzada para tus sistemas</p>
+                        <a href="#" class="btn btn-sm btn-outline-primary">Más info</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card service-card shadow-sm text-center p-4">
+                        <div class="mb-3 text-primary">
+                            <i class="fas fa-cloud fa-3x"></i>
+                        </div>
+                        <h4>Cloud Computing</h4>
+                        <p class="text-muted">Soluciones en la nube escalables</p>
+                        <a href="#" class="btn btn-sm btn-outline-primary">Más info</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card service-card shadow-sm text-center p-4">
+                        <div class="mb-3 text-primary">
+                            <i class="fas fa-headset fa-3x"></i>
+                        </div>
+                        <h4>Soporte IT</h4>
+                        <p class="text-muted">Asistencia técnica 24/7</p>
+                        <a href="#" class="btn btn-sm btn-outline-primary">Más info</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección Porqué Nososotros -->
+        <section id="nosotros" class="py-5">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <img src="img/us-team.jpg" alt="Equipo de trabajo" class="img-fluid rounded shadow">
+                    </div>
+                    <div class="col-lg-6 mt-4 mt-lg-0">
+                        <h2 class="fw-bold mb-4">¿Por qué elegirnos?</h2>
+                        <ul class="list-unstyled">
+                            <li class="mb-3">
+                                <div class="d-flex">
+                                    <div class="me-3 text-primary">
+                                        <i class="fas fa-check-circle fa-2x"></i>
+                                    </div>
+                                    <div>
+                                        <h5>+10 años de experiencia</h5>
+                                        <p class="text-muted mb-0">Equipo certificado en las últimas tecnologías</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="mb-3">
+                                <div class="d-flex">
+                                    <div class="me-3 text-primary">
+                                        <i class="fas fa-check-circle fa-2x"></i>
+                                    </div>
+                                    <div>
+                                        <h5>Soporte 24/7</h5>
+                                        <p class="text-muted mb-0">Asistencia inmediata cuando la necesites</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="mb-3">
+                                <div class="d-flex">
+                                    <div class="me-3 text-primary">
+                                        <i class="fas fa-check-circle fa-2x"></i>
+                                    </div>
+                                    <div>
+                                        <h5>Precios flexibles</h5>
+                                        <p class="text-muted mb-0">Planes adaptados a tu presupuesto</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======= Sección Sobre Mí======= -->
+        <section id="about-me" class="py-5 bg-light">
+            <div class="container">
+                <div class="row align-items-center">
+
+                    <!-- Imagen de Perfil -->
+                    <div class="col-lg-4 text-center mb-4 mb-lg-0">
+                        <img src="img/aboutme-photo.png" alt="My Profile Photo"
+                            class="img-fluid rounded-circle shadow-lg" style="max-width: 250px;">
+                        <div class="mt-4">
+                            <a href="https://linkedin.com/in/alexander-ovalle-252722aja"
+                                class="btn btn-outline-primary me-2" target="_blank">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="https://github.com/jaovallea" class="btn btn-outline-dark me-2" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="mailto:jaovallea@gmail.com" class="btn btn-outline-info">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Info Personal -->
+                    <div class="col-lg-8">
+                        <h2 class="fw-bold mb-4">Sobre Mí</h2>
+                        <p class="lead">¡Hola! Soy Alexander Ovalle, estudiante de Programación Básica en Talento Tech
+                            Oriente, apasionado por las tecnologías de la información.</p>
+
+                        <div class="mb-4">
+                            <h5><i class="fas fa-graduation-cap text-primary me-2"></i>Formación Académica</h5>
+                            <ul class="list-unstyled ps-4">
+                                <li class="mb-2">
+                                    <strong>Universidad Industrial de Santander</strong>
+                                    <p class="mb-0 text-muted">Ingeniería de Sistemas | 2009</p>
+                                </li>
+                                <li class="mb-2">
+                                    <strong>UDES</strong>
+                                    <p class="mb-0 text-muted">Maestría en Tecnologías Digitales Aplicadas a la
+                                        Educación | 2023</p>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-4">
+                            <h5><i class="fas fa-code text-primary me-2"></i>Habilidades Técnicas</h5>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-primary">HTML/CSS</span>
+                                <span class="badge bg-primary">Bootstrap</span>
+                                <span class="badge bg-primary">JavaScript</span>
+                                <span class="badge bg-primary">Python</span>
+                                <span class="badge bg-primary">Redes</span>
+                                <span class="badge bg-primary">Cybersecurity</span>
+                                <span class="badge bg-primary">Infraestructura</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h5><i class="fas fa-trophy text-primary me-2"></i>Logros</h5>
+                            <ul>
+                                <li>Diseño y gestión de red corporativa.</li>
+                                <li>Implementación de GLPI para control TI y mesa de ayuda.</li>
+                                <li>Instauración y administración de clúster de virtualización.</li>
+                                <li>Integración y centralización de servicios mediante Directorio Activo.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Objetivos Personales -->
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body">
+                                <h4 class="card-title"><i class="fas fa-bullseye text-primary me-2"></i>Mis Objetivos
+                                </h4>
+                                <p class="card-text">Como profesional en TIC, busco complementar mis habilidades de
+                                    sysadmin, adquiriendo competencias en desarrollo, para implementar soluciones
+                                    innovadoras que impacten positivamente en la
+                                    sociedad. Este proyecto forma parte de mi proceso de aprendizaje en Programación
+                                    Básica.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!--  Sección Contacto -->
+        <section id="contacto" class="py-5 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h2 class="fw-bold mb-4">Contáctanos</h2>
+                        <form>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Nombre completo" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="Correo electrónico" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="tel" class="form-control" placeholder="Teléfono">
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control" rows="4" placeholder="Tu mensaje" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enviar consulta</button>
+                        </form>
+                    </div>
+                    <div class="col-lg-6 mt-4 mt-lg-0">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">Información de contacto</h4>
+                                <ul class="list-unstyled">
+                                    <li class="mb-3">
+                                        <div class="d-flex">
+                                            <div class="me-3 text-primary">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Dirección</h6>
+                                                <p class="text-muted mb-0">Cra 15 #100A-00 Oficina Tecnológica -
+                                                    Bucaramanga - COL
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="mb-3">
+                                        <div class="d-flex">
+                                            <div class="me-3 text-primary">
+                                                <i class="fas fa-phone"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Teléfono</h6>
+                                                <p class="text-muted mb-0">+57 304 440 4042</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="mb-3">
+                                        <div class="d-flex">
+                                            <div class="me-3 text-primary">
+                                                <i class="fas fa-envelope"></i>
+                                            </div>
+                                            <div>
+                                                <h6>Email</h6>
+                                                <p class="text-muted mb-0">jaovallea@gmail.com</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <hr>
+                                <h5 class="mb-3">Horario de atención</h5>
+                                <p class="text-muted">Lunes a Viernes: 9:00 - 18:00<br>
+                                    Sábados: 10:00 - 14:00<br>
+                                    </i> Soporte Premium: 24/7 <i class="fas fa-star"></i></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======= Sección Blog ======= -->
+        <section id="blog" class="py-5 bg-white">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold">Blog</h2>
+                    <p class="text-muted">Mantente actualizado con nuestras publicaciones</p>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Blog, Post 1 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <img src="img/blog-security.png" class="card-img-top" alt="Tendencias en Ciberseguridad">
+                            <div class="card-body">
+                                <div class="d-flex mb-3">
+                                    <span class="badge bg-primary me-2">Ciberseguridad</span>
+                                    <small class="text-muted">28 Marzo 2025</small>
+                                </div>
+                                <h5 class="card-title">Tendencias en Ciberseguridad 2025</h5>
+                                <p class="card-text">Descubre las nuevas amenazas y soluciones para proteger tu negocio
+                                    este
+                                    año.</p>
+                            </div>
+                            <div class="card-footer bg-transparent border-0">
+                                <a href="#" class="btn btn-sm btn-outline-primary">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Blog, Post 2 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <img src="img/blog-cloudcomputing.png" class="card-img-top" alt="Migración a la Nube">
+                            <div class="card-body">
+                                <div class="d-flex mb-3">
+                                    <span class="badge bg-success me-2">Cloud</span>
+                                    <small class="text-muted">15 Marzo 2025</small>
+                                </div>
+                                <h5 class="card-title">Guía Completa de Migración a la Nube</h5>
+                                <p class="card-text">Todo lo que necesitas saber para mover tus sistemas a la nube sin
+                                    riesgos.</p>
+                            </div>
+                            <div class="card-footer bg-transparent border-0">
+                                <a href="#" class="btn btn-sm btn-outline-success">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Blog, Post 3 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <img src="img/blog-ia.png" class="card-img-top" alt="Inteligencia Artificial">
+                            <div class="card-body">
+                                <div class="d-flex mb-3">
+                                    <span class="badge bg-warning me-2">IA</span>
+                                    <small class="text-muted">1 Marzo 2025</small>
+                                </div>
+                                <h5 class="card-title">Cómo la IA está Transformando los Negocios</h5>
+                                <p class="card-text">Casos prácticos de implementación de inteligencia artificial en
+                                    PYMES.
+                                </p>
+                            </div>
+                            <div class="card-footer bg-transparent border-0">
+                                <a href="#" class="btn btn-sm btn-outline-warning">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botón "Ver todo" -->
+                <div class="text-center mt-4">
+                    <a href="#" class="btn btn-primary px-4">
+                        <i class="fas fa-book-open me-2"></i>Ver todas las publicaciones
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <div class="container mt-4">
+            <h2 class="mb-4">Lista de Tareas</h2>
+            <div class="input-group mb-3">
+                <input type="text" id="taskInput" class="form-control" placeholder="Agregar una nueva tarea...">
+                <button id="addTaskBtn" class="btn btn-primary">Agregar</button>
+            </div>
+            <ul id="taskList" class="list-group"></ul>
+        </div>
+
+        <!-- Image Gallery Section -->
+        <section id="gallery" class="gallery-section">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold">Galería de nuestros trabajos</h2>
+                    <p class="text-muted">Explore nuestros proyectos y soluciones tecnológicas</p>
+                </div>
+
+                <!-- Filter Buttons -->
+                <div class="gallery-filter mb-5">
+                    <button class="btn btn-outline-primary active" data-filter="all">Todos los proyectos</button>
+                    <button class="btn btn-outline-primary" data-filter="web">Desarrollo web</button>
+                    <button class="btn btn-outline-primary" data-filter="security">Cyberseguridad</button>
+                    <button class="btn btn-outline-primary" data-filter="cloud">Soluciones en la nube</button>
+                    <button class="btn btn-outline-primary" data-filter="support">Soporte TI</button>
+                </div>
+
+                <!-- Gallery Grid -->
+                <div class="row gallery-grid">
+                    <!-- Web Development Projects -->
+                    <div class="col-lg-4 col-md-6 gallery-item" data-category="web">
+                        <a href="img/gallery/web1.jpg" data-lightbox="gallery"
+                            data-title="E-commerce Website Development">
+                            <img src="img/gallery/web1-thumb.jpg" alt="Proyecto de desarrollo web" class="img-fluid">
+                            <div class="img-overlay">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 gallery-item" data-category="web">
+                        <a href="img/gallery/web2.jpg" data-lightbox="gallery"
+                            data-title="Rediseño de website corporativo">
+                            <img src="img/gallery/web2-thumb.jpg" alt="Proyecto de desarrollo web" class="img-fluid">
+                            <div class="img-overlay">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Cybersecurity Projects -->
+                    <div class="col-lg-4 col-md-6 gallery-item" data-category="security">
+                        <a href="img/gallery/security1.jpg" data-lightbox="gallery"
+                            data-title="Implementación de seguridad en redes">
+                            <img src="img/gallery/security1-thumb.jpg" alt="Proyecto de ciberseguridad"
+                                class="img-fluid">
+                            <div class="img-overlay">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Cloud Solutions Projects -->
+                    <div class="col-lg-4 col-md-6 gallery-item" data-category="cloud">
+                        <a href="img/gallery/cloud1.jpg" data-lightbox="gallery"
+                            data-title="Proyecto de migración a la nube">
+                            <img src="img/gallery/cloud1-thumb.jpg" alt="Solución en la nube" class="img-fluid">
+                            <div class="img-overlay">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 gallery-item" data-category="cloud">
+                        <a href="img/gallery/cloud2.jpg" data-lightbox="gallery"
+                            data-title="Infraestructura híbrida en la nube">
+                            <img src="img/gallery/cloud2-thumb.jpg" alt="Solución en la nube" class="img-fluid">
+                            <div class="img-overlay">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- IT Support Projects -->
+                    <div class="col-lg-4 col-md-6 gallery-item" data-category="support">
+                        <a href="img/gallery/support1.jpg" data-lightbox="gallery" data-title="Soporte TI en sitio">
+                            <img src="img/gallery/support1-thumb.jpg" alt="Soporte TI" class="img-fluid">
+                            <div class="img-overlay">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Registration Form Section -->
+        <section id="register" class="py-5 bg-white">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body p-4">
+                                <h2 class="card-title text-center mb-4">Cree una cuenta</h2>
+                                <form id="registrationForm" novalidate>
+                                    <!-- Name -->
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label">Nombre completo</label>
+                                        <input type="text" class="form-control" id="name" required>
+                                        <div class="invalid-feedback">Por favor escriba su nombre.</div>
+                                    </div>
+
+                                    <!-- Email -->
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Correo</label>
+                                        <input type="email" class="form-control" id="email" required>
+                                        <div class="invalid-feedback">Por favor escriba un correo válido.</div>
+                                    </div>
+
+                                    <!-- Password -->
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Contraseña</label>
+                                        <input type="password" class="form-control" id="password" minlength="8"
+                                            required>
+                                        <div class="invalid-feedback">La contraseña debe tener al menos 8 caracteres.
+                                        </div>
+                                    </div>
+
+                                    <!-- Confirm Password -->
+                                    <div class="mb-3">
+                                        <label for="confirmPassword" class="form-label">Confirme la contraseña</label>
+                                        <input type="password" class="form-control" id="confirmPassword" required>
+                                        <div class="invalid-feedback">Las contraseñas no coinciden.</div>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <button type="submit" class="btn btn-primary w-100 mt-3">Registrar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer -->
+        <footer class="py-4 bg-dark text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 mb-4 mb-md-0">
+                        <img src="img/techlogo.png" alt="Logo" height="50" class="mb-3">
+                        <p>Soluciones tecnológicas innovadoras para tu negocio.</p>
+                        <div class="social-icons">
+                            <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-white me-3"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-4 mb-md-0">
+                        <h5>Enlaces</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-white">Inicio</a></li>
+                            <li><a href="#servicios" class="text-white">Servicios</a></li>
+                            <li><a href="#nosotros" class="text-white">Sobre mí</a></li>
+                            <li><a href="#nosotros" class="text-white">¿Por qué elegirnos?</a></li>
+                            <li><a href="#contacto" class="text-white">Contacto</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 mb-4 mb-md-0">
+                        <h5>Servicios</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-white">Desarrollo Web</a></li>
+                            <li><a href="#" class="text-white">Ciberseguridad</a></li>
+                            <li><a href="#" class="text-white">Cloud Computing</a></li>
+                            <li><a href="#" class="text-white">Soporte IT</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <h5>Newsletter</h5>
+                        <p>Suscríbete para recibir nuestras últimas noticias.</p>
+                        <form class="mb-3">
+                            <div class="input-group">
+                                <input type="email" class="form-control" placeholder="Tu email">
+                                <button class="btn btn-primary" type="submit">Enviar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <hr class="my-4">
+                <div class="text-center">
+                    <p class="mb-0">&copy; 2023 TIC Soluciones. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </footer>
+        <!-- sugerido: -->
+        <!-- Bootstrap JS Bundle with Popper / (Optional, for dropdowns, modals, etc.) -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Lightbox Gallery JS -->
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/js/lightgallery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lg-zoom/1.1.0/lg-zoom.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lg-fullscreen/1.1.0/lg-fullscreen.min.js"></script>
+        <!-- Your script.js -->
+        <script src="js/script.js"></script>
+</body>
+
+</html>

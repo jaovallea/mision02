@@ -1,0 +1,7 @@
+    /* Custom CSS to fully center navbar contents */
+    .navbar-centered .navbar-collapse {
+      justify-content: center !important;
+    }
+    .navbar-centered .navbar-nav {
+      align-items: center;
+    }
